@@ -32,7 +32,18 @@ class Chart extends Component {
 			}
 			const {x, y} = this.getDriverCoordinates(index, progress, data);
 			// const {x, y} = this.getDriverCoordinates(index, progress, data);
-			finalData.push({x, y, name: 'Driver'});
+			finalData.push({
+				x,
+				y,
+				name: 'Driver',
+				markerType: 'cross',
+				showInLegend: true,
+				markerColor: 'red',
+				markerSize: 12,
+				// indexLabel: 'Driver',
+				// indexLabelFontSize: 10,
+				// indexLabelPlacement: 'outside'
+			});
 			// for(var i=index+1; i < response.data.length; i++){
 			// 	let obj = {};
 			// 	obj['x'] = response.data[i].x_coordinate;
@@ -101,29 +112,39 @@ class Chart extends Component {
 	render() {
 		const options = {
 			animationEnabled: true,
+			animationDuration: 2000,
 			exportEnabled: true,
-			theme: "light2", // "light1", "dark1", "dark2"
+			theme: "light2",
 			title:{
 				text: "Driver route"
 			},
 			axisY: {
 				title: "Y Coordinate",
-				includeZero: false,
 				interval:10,
 				minimum: 0,
-				maximum: 110
+				maximum: 110,
+				gridThickness: 1
 			},
 			axisX: {
 				title: "X Coordinate",
 				interval: 10,
 				minimum: 0,
-				maximum: 50
+				maximum: 50,
+				gridThickness: 1
+
 			},
 			data: [{
 				type: "line",
 				toolTipContent: "{name} ({x},{y})",
-				dataPoints: this.state.finalData
+				dataPoints: this.state.finalData,
+				showInLegend: true,
+				legendMarkerType: "circle",
+				legendText: 'Route taken by driver'
 			}],
+			legend: {
+				horizontalAlign: 'center',
+				verticalAlign: 'bottom'
+			},
 			width: 750,
 			height: 750,
 		}
