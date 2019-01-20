@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  start_stop: MyString
+  end_stop: MyString
+  speed_limit: 1
+  leg_ID: MyString
+
+two:
+  start_stop: MyString
+  end_stop: MyString
+  speed_limit: 1
+  leg_ID: MyString
