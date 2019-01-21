@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import './App.css';
 import DriverForm from './components/DriverForm';
 import BonusDriverForm from './components/BonusDriverForm';
+import Chart from './components/Chart';
 
 class App extends Component {
 
