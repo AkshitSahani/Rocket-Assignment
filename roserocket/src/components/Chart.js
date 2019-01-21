@@ -94,7 +94,7 @@ class Chart extends Component {
 			await getLegs(this);
 			const finalData = await this.getAndProcessStops(index, progress);
 			await fetchBonusDriverInfo('', this);
-			this.getRemainingDuration();
+			// this.getRemainingDuration();
       // console.log('finalData', finalData);
       this.setState({finalData, loading: false});
     }
