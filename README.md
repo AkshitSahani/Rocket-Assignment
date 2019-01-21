@@ -12,6 +12,8 @@ Once that is done, cd back into the React folder (roserocket) and run npm start.
 
 Navigate to http://localhost:3000/ and enjoy the app!
 
+If any error shows up on page, simply refresh once.
+
 
 
 #Features
