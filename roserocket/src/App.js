@@ -1,8 +1,5 @@
 import React, {Component} from 'react';
 import './App.css';
-// import StopsList from './components/StopsList';
-// import LineChart from './components/LineChart';
-import Chart from './components/Chart';
 import DriverForm from './components/DriverForm';
 import BonusDriverForm from './components/BonusDriverForm';
 
