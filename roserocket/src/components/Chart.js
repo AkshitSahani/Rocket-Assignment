@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import CanvasJSReact from '../canvasjs/canvasjs.react'
 import axios from 'axios';
-import {getDriverInfo, getLegs} from '../commonFunctions/functions';
+import {getDriverInfo, getLegs, fetchBonusDriverInfo} from '../commonFunctions/functions';
 import Time from './Time';
 // var CanvasJSReact = require('./assets/js/canvasjs.react');
 const CanvasJS = CanvasJSReact.CanvasJS;
@@ -93,7 +93,7 @@ class Chart extends Component {
 			const {index, progress} = await getDriverInfo('', this);
 			await getLegs(this);
 			const finalData = await this.getAndProcessStops(index, progress);
-			await this.fetchBonusDriverInfo();
+			await fetchBonusDriverInfo('', this);
 			this.getRemainingDuration();
       // console.log('finalData', finalData);
       this.setState({finalData, loading: false});
@@ -114,18 +114,6 @@ class Chart extends Component {
 	async componentDidUpdate(prevProps, prevState) {
 		if(this.props.refresh !== prevProps.refresh){
 			this.loadData();
-		}
-	}
-
-	fetchBonusDriverInfo = async () => {
-		try{
-			const response = await axios.get('/api/v1/bonusdriver');
-			// console.log('resp from get bonus driver info', response);
-			this.setState({bonusDriver: {x: response.data.x_coordinate, y: response.data.y_coordinate}});
-		}
-		catch(e){
-			console.log('e in getting bonus driver info', e);
-			console.log('full error', e.response);
 		}
 	}
 
@@ -232,6 +220,7 @@ class Chart extends Component {
 		const options = {
 			animationEnabled: true,
 			animationDuration: 2000,
+			// backgroundColor: 'lightgrey',
 			exportEnabled: true,
 			theme: "light2",
 			title:{
@@ -274,27 +263,32 @@ class Chart extends Component {
 				horizontalAlign: 'center',
 				verticalAlign: 'bottom'
 			},
-			width: 750,
-			height: 750,
+			width: 650,
+			height: 650,
 		};
 
 		return (
-			<div>
-				{
-					this.state.finalData.length ?
+			<div className="main pad-left">
+				{/* <span classname="test"> */}
+					{
+						this.state.finalData.length ?
 						<CanvasJSChart
 							options = {options}
 							onRef={ref => this.chart = ref}
 						/>
 						:
 						null
-				}
-				<Time
-					time={this.state.totalDuration}
-					formattedTime={this.formatTime(this.state.totalDuration)}
-					remainingTime={this.state.remainingDuration}
-					formattedRemainingTime={this.formatTime(this.state.remainingDuration)}
-				/>
+					}
+				{/* </span> */}
+				<div className="pad-right">
+
+					<Time
+						time={this.state.totalDuration}
+						formattedTime={this.formatTime(this.state.totalDuration)}
+						remainingTime={this.state.remainingDuration}
+						formattedRemainingTime={this.formatTime(this.state.remainingDuration)}
+					/>
+				</div>
 
 			</div>
 		);

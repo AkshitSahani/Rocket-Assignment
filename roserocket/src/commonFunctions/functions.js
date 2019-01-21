@@ -34,3 +34,17 @@ export const getLegs = async (self) => {
     console.log('full error', e.response);
   }
 }
+
+export const fetchBonusDriverInfo = async (type, self) => {
+  try{
+    const response = await axios.get('/api/v1/bonusdriver');
+    // console.log('resp from get bonus driver info', response);
+    type === 'bonus' ? self.setState({x: response.data.x_coordinate, y: response.data.y_coordinate}) : self.setState({bonusDriver: {x: response.data.x_coordinate, y: response.data.y_coordinate}});
+  }
+  catch(e){
+    console.log('e in getting bonus driver info', e);
+    console.log('full error', e.response);
+  }
+}
+
+export const regex = /^[0-9]*$/;

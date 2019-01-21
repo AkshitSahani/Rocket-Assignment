@@ -1,27 +1,26 @@
 import React, {Component} from 'react';
 import axios from 'axios';
-import {getDriverInfo} from '../commonFunctions/functions';
+import {fetchBonusDriverInfo, regex} from '../commonFunctions/functions';
 
 class BonusDriverForm extends Component {
 
   state = {
     x: '',
-    y: ''
+    y: '',
+    error: ''
   }
 
-  onInputChange = (event, inputType) => this.setState({[inputType]: event.target.value});
-
-  // getLegs = async () => {
-	// 	try{
-	// 		const response = await axios.get('api/v1/legs');
-	// 		console.log('resp from get legs', response);
-	// 		this.setState({legs: response.data});
-	// 	}
-	// 	catch(e){
-	// 		console.log('error in getting legs', e);
-	// 		console.log('full error', e.response);
-	// 	}
-	// }
+  onInputChange = (event, inputType) => {
+    if(!regex.test(event.target.value)){
+      return this.setState({error: 'Sorry, only numbers are accepted!'})
+    }
+    else if(event.target.value < 0 || event.target.value > 100){
+      return this.setState({error: 'Sorry, only numbers between 0 and 100 are accepted!'})
+    }
+    else{
+      this.setState({[inputType]: event.target.value, error: ''});
+    }
+  }
 
   handleFormSubmit = async (event) => {
     event.preventDefault();
@@ -38,24 +37,26 @@ class BonusDriverForm extends Component {
     }
   }
 
-  // async componentDidMount() {
-  //   getDriverInfo('form', this);
-  //   this.getLegs();
-  // }
+  async componentDidMount() {
+    fetchBonusDriverInfo('bonus', this);
+  }
 
   render(){
     return (
-      <div>
-        <button onClick={this.props.toggleBonusDriver}>
+      <div className="main">
+        <button
+          onClick={this.props.toggleBonusDriver}
+          className="submit long-wide"
+        >
           {this.props.showBonusDriver ? "Hide" : "Show"} Bonus Driver
         </button>
 
-        <form className="container" onSubmit={this.handleFormSubmit}>
+        <form className="main form" onSubmit={this.handleFormSubmit}>
           <h2>
             Update Bonus Driver Coordinates
           </h2>
           <label>
-            X Coordinate:
+            X-Coordinate:
             <input
               type="text"
               value={this.state.x}
@@ -63,14 +64,22 @@ class BonusDriverForm extends Component {
             />
           </label>
           <label>
-            Y Coordinate:
+            Y-Coordinate:
             <input
               type="text"
               value={this.state.y}
               onChange={(event) => this.onInputChange(event, 'y')}
             />
           </label>
-          <input type="submit" value="Submit" />
+          <input className="submit" type="submit" value="Submit" />
+          {
+            this.state.error ?
+              <h5 style={{color:'red'}}>
+                {this.state.error}
+              </h5>
+              :
+              null
+          }
         </form>
       </div>
     )

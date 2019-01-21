@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import './App.css';
 // import StopsList from './components/StopsList';
 // import LineChart from './components/LineChart';
@@ -6,7 +6,7 @@ import Chart from './components/Chart';
 import DriverForm from './components/DriverForm';
 import BonusDriverForm from './components/BonusDriverForm';
 
-class App extends React.Component {
+class App extends Component {
 
   state = {
     refresh: 0,
@@ -21,18 +21,27 @@ class App extends React.Component {
     // console.log('in app.js', this.state.refresh);
     return (
       <div>
-        <Chart
-          refresh={this.state.refresh}
-          showBonusDriver={this.state.showBonusDriver}
-        />
-        <DriverForm
-          refreshComp={this.refreshComp}
-        />
-        <BonusDriverForm
-          toggleBonusDriver={this.toggleBonusDriver}
-          showBonusDriver={this.state.showBonusDriver}
-          refreshComp={this.refreshComp}
-        />
+        <h1>
+          RoseRocket Assignment
+        </h1>
+
+        <div className="container background">
+          <Chart
+            refresh={this.state.refresh}
+            showBonusDriver={this.state.showBonusDriver}
+          />
+          <div className="inner-container">
+
+            <DriverForm
+              refreshComp={this.refreshComp}
+            />
+            <BonusDriverForm
+              toggleBonusDriver={this.toggleBonusDriver}
+              showBonusDriver={this.state.showBonusDriver}
+              refreshComp={this.refreshComp}
+            />
+          </div>
+        </div>
       </div>
     );
   }

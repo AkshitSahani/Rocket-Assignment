@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import axios from 'axios';
-import {getDriverInfo, getLegs} from '../commonFunctions/functions';
+import {getDriverInfo, getLegs, regex} from '../commonFunctions/functions';
 
 class DriverForm extends Component {
 
@@ -8,9 +8,23 @@ class DriverForm extends Component {
     legs: [],
     selectedLeg: '',
     progress: '',
+    error: '',
   }
 
-  onInputChange = (event, inputType) => this.setState({[inputType]: event.target.value});
+  onProgressChange = (event) => {
+    console.log('value', event.target.value);
+    if(!regex.test(event.target.value)){
+      return this.setState({error: 'Sorry, only numbers are accepted!'})
+    }
+    else if(event.target.value < 0 || event.target.value > 100){
+      return this.setState({error: 'Sorry, only numbers between 0 and 100 are accepted!'})
+    }
+    else{
+      this.setState({progress: event.target.value, error: ''});
+    }
+  }
+
+  onSelect = (event) => this.setState({selectedLeg: event.target.value});
 
   handleFormSubmit = async (event) => {
     event.preventDefault();
@@ -34,39 +48,50 @@ class DriverForm extends Component {
 
   render(){
     return (
-      <form className="container" onSubmit={this.handleFormSubmit}>
+      <form className="main form" onSubmit={this.handleFormSubmit}>
         <h2>
           Update Driver Coordinates
         </h2>
-        <label>
-          Leg:
-          <select
-            value={this.state.selectedLeg}
-            onChange={(event) => this.onInputChange(event, 'selectedLeg')}
-          >
-            {
+        <div className="form-row">
+          <label>
+            Leg:
+            <select
+              value={this.state.selectedLeg}
+              onChange={this.onSelect}
+            >
+              {
               this.state.legs.map((leg) => {
                 return (
                   <option
                     value={leg.leg_ID}
                     key={leg.id}
-                  >
-                    {leg.leg_ID}
-                  </option>
-                )
-              })
-            }
-          </select>
-        </label>
-        <label>
-          Progress (%):
-          <input
-            type="text"
-            value={this.state.progress}
-            onChange={(event) => this.onInputChange(event, 'progress')}
-          />
-        </label>
-        <input type="submit" value="Submit" />
+                    >
+                      {leg.leg_ID}
+                    </option>
+                  )
+                })
+              }
+            </select>
+          </label>
+          <label>
+            Progress (%):
+            <input
+              type="text"
+              value={this.state.progress}
+              onChange={this.onProgressChange}
+            />
+          </label>
+      </div>
+      <input className="submit" type="submit" value="Submit" />
+
+        {
+          this.state.error ?
+            <h5 style={{color:'red'}}>
+              {this.state.error}
+            </h5>
+            :
+            null
+        }
       </form>
     )
   }

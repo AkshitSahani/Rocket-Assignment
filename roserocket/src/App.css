@@ -18,15 +18,115 @@
   color: white;
 }
 
-.App-link {
-  color: #61dafb;
+.main{
+  display: flex;
+  align-items:center;
+  flex-direction:  column;
+  /* border: 2px solid black; */
+  /* justify-content: space-between; */
+  /* height: 400; */
+  /* width: 800; */
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.background{
+  background-color: lightseagreen;
+}
+
+.form {
+  height: 225px;
+  width: 500px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border: 1px solid black;
+  padding: 10px;
+  margin: 20px;
+}
+
+.form-row{
+  width: 300px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.submit{
+  height: 30px;
+  width: 100px;
+  border-radius: 5px;
+  /* color: white; */
+  color: teal;
+  padding: 5px;
+  font-size: 15px;
+  font-weight: bold;
+  /* margin-top: 20px; */
+}
+
+.submit:hover{
+  background-color: teal;
+  color: white;
+}
+
+input {
+  width: 50px;
+  height: 20px;
+  text-align: center;
+  border-radius: 5px;
+  /* border: none; */
+  margin-left: 5px;
+  font-size: 15px;
+}
+
+input:focus{
+  /* border: 1px solid green; */
+  /* width: 50px;
+  height: 25px; */
+}
+
+.long-wide{
+  width: 175px;
+  height: 30px;
+}
+
+select {
+  width: 60px;
+  height: 25px;
+  text-align: center;
+  margin-left: 5px;
+  font-size: 15px;
+  /* bo */
+}
+
+label {
+  font-size: 20px;
+}
+
+h3{
+  text-align: center;
+  font-weight: 400;
+}
+
+.pad-left{
+  padding-left: 20px;
+  padding-top: 50px;
+}
+
+.bold {
+  font-weight: bold;
+  text-decoration: underline;
+}
+
+.container{
+  display: flex;
+  flex-direction: row;
+}
+
+.inner-container{
+  padding-top: 75px;
+}
+
+h1 {
+  text-align: center;
+  text-decoration: underline;
 }
