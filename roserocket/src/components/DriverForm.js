@@ -1,8 +1,8 @@
 import React, {Component} from 'react';
 import axios from 'axios';
-import {getDriverInfo} from '../commonFunctions/functions';
+import {getDriverInfo, getLegs} from '../commonFunctions/functions';
 
-class Form extends Component {
+class DriverForm extends Component {
 
   state = {
     legs: [],
@@ -11,18 +11,6 @@ class Form extends Component {
   }
 
   onInputChange = (event, inputType) => this.setState({[inputType]: event.target.value});
-
-  getLegs = async () => {
-		try{
-			const response = await axios.get('api/v1/legs');
-			console.log('resp from get legs', response);
-			this.setState({legs: response.data});
-		}
-		catch(e){
-			console.log('error in getting legs', e);
-			console.log('full error', e.response);
-		}
-	}
 
   handleFormSubmit = async (event) => {
     event.preventDefault();
@@ -41,12 +29,15 @@ class Form extends Component {
 
   async componentDidMount() {
     getDriverInfo('form', this);
-    this.getLegs();
+    getLegs(this);
   }
 
   render(){
     return (
       <form className="container" onSubmit={this.handleFormSubmit}>
+        <h2>
+          Update Driver Coordinates
+        </h2>
         <label>
           Leg:
           <select
@@ -81,4 +72,4 @@ class Form extends Component {
   }
 }
 
-export default Form;
+export default DriverForm;

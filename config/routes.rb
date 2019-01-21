@@ -9,7 +9,9 @@ Rails.application.routes.draw do
       resources :legs, only: [:index]
       resources :stops, only: [:index]
       get '/driver', to: 'stops#driver'
-      put '/driver', to: 'stops#edit_driver'
+      put '/driver', to: 'stops#update_driver'
+      get '/bonusdriver', to: 'stops#bonus_driver'
+      put '/bonusdriver', to: 'stops#update_bonus_driver'
     end
   end
 

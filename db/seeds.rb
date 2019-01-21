@@ -154,3 +154,5 @@ legs.each do |leg|
 end
 
 Driver.create(active_leg_id: 'FG', leg_progress: '33')
+
+BonusDriver.create(x_coordinate: 50, y_coordinate: 55)

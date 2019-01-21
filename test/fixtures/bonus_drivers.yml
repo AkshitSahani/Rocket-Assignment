@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  x_coordinate: 1
+  y_coordinate: MyString
+  integer: MyString
+
+two:
+  x_coordinate: 1
+  y_coordinate: MyString
+  integer: MyString
