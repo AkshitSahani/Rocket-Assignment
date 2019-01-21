@@ -14,7 +14,7 @@ class BonusDriverForm extends Component {
     if(!regex.test(event.target.value)){
       return this.setState({error: 'Sorry, only numbers are accepted!'})
     }
-    else if(event.target.value < 0 || event.target.value > 100){
+    else if(event.target.value < 0 || event.target.value > 200){
       return this.setState({error: 'Sorry, only numbers between 0 and 100 are accepted!'})
     }
     else{
